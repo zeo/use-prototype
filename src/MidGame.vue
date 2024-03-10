@@ -11,7 +11,7 @@ const { p1, p2, sum, restart } = defineProps<{
     <h1 style="text-align: center; margin-top: 64px;">Count to {{ sum }} apples!</h1>
 
     <div style="display: flex; justify-content: center;">
-        <template v-for="i in p1">
+        <template v-for="_ in p1">
             <img style="margin-right: 8px; width: 48px; height: 48px; margin-top: auto; margin-bottom: auto;" src="https://pngfre.com/wp-content/uploads/apple-95-270x300.png">
         </template>
     </div>
@@ -21,7 +21,7 @@ const { p1, p2, sum, restart } = defineProps<{
     </div>
 
     <div style="display: flex; justify-content: center;">
-        <template v-for="i in p2">
+        <template v-for="_ in p2">
             <img style="margin-right: 8px; width: 48px; height: 48px; margin-top: auto; margin-bottom: auto;" src="https://pngfre.com/wp-content/uploads/apple-95-270x300.png">
         </template>
     </div>
@@ -32,7 +32,7 @@ const { p1, p2, sum, restart } = defineProps<{
     </div>
 
     <div style="display: flex; justify-content: center;">
-        <template v-for="i in sum">
+        <template v-for="_ in sum">
             <img style="margin-right: 8px; width: 48px; height: 48px; margin-top: auto; margin-bottom: auto;" src="https://pngfre.com/wp-content/uploads/apple-95-270x300.png">
         </template>
     </div>

@@ -59,7 +59,7 @@ watchEffect(() => {
         <h1 style="text-align: center; margin-top: 64px;">Count to {{ requiredSum }} apples!</h1>
 
         <div style="display: flex; justify-content: center; margin-top: 32px;">
-          <button v-for="i in playerOne" style="margin-right: 8px; background: none; border: none;" @click="playerOnePress">
+          <button v-for="_ in playerOne" style="margin-right: 8px; background: none; border: none;" @click="playerOnePress">
             <img style="width: 64px; height: 64px;" src="https://pngfre.com/wp-content/uploads/apple-95-270x300.png">
           </button>
         </div>
@@ -71,7 +71,7 @@ watchEffect(() => {
         <div style="display: flex; justify-content: center;">
           <img style="width: 64px; height: 64px;" src="https://png.pngtree.com/png-clipart/20230104/original/pngtree-wicker-rattan-basket-png-image_8865318.png"/>
 
-          <template v-for="i in playerOneGiven">
+          <template v-for="_ in playerOneGiven">
             <img style="margin-right: 8px; width: 48px; height: 48px; margin-top: auto; margin-bottom: auto;" src="https://pngfre.com/wp-content/uploads/apple-95-270x300.png">
           </template>
         </div>
@@ -91,7 +91,7 @@ watchEffect(() => {
         <h1 style="text-align: center; margin-top: 64px;">Count to {{ requiredSum }} apples!</h1>
 
         <div style="display: flex; justify-content: center; margin-top: 32px;">
-          <button v-for="i in playerTwo" style="margin-right: 8px; background: none; border: none;" @click="playerTwoPress">
+          <button v-for="_ in playerTwo" style="margin-right: 8px; background: none; border: none;" @click="playerTwoPress">
             <img style="width: 64px; height: 64px;" src="https://pngfre.com/wp-content/uploads/apple-95-270x300.png">
           </button>
         </div>
@@ -103,7 +103,7 @@ watchEffect(() => {
         <div style="display: flex; justify-content: center;">
           <img style="width: 64px; height: 64px;" src="https://png.pngtree.com/png-clipart/20230104/original/pngtree-wicker-rattan-basket-png-image_8865318.png"/>
 
-          <template v-for="i in playerTwoGiven">
+          <template v-for="_ in playerTwoGiven">
             <img style="margin-right: 8px; width: 48px; height: 48px; margin-top: auto; margin-bottom: auto;" src="https://pngfre.com/wp-content/uploads/apple-95-270x300.png">
           </template>
         </div>
