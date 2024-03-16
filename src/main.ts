@@ -1,7 +1,7 @@
 import { createApp } from 'vue';
 import { createRouter, createWebHistory } from 'vue-router';
 import App from './App.vue';
-import { Home } from "./pages";
+import { AdditionGame, Home } from "./pages";
 import "./app.css";
 
 const router = createRouter({
@@ -15,7 +15,7 @@ const router = createRouter({
         {
             path: "/games/addition",
             name: "games.addition",
-            component: Home,
+            component: AdditionGame,
         },
     ],
 });
