@@ -1,20 +1,10 @@
 <script setup lang="ts">
-import welcomePng from "../assets/welcome.png"
+import lovePng from "../assets/love.png";
 
-const buttons = [
-    {
-        text: "Addition Game",
-        route: "games.addition"
-    },
-    {
-        text: "Subtraction Game",
-        route: "games.subtraction",
-    },
-    {
-        text: "Bus Sommen",
-        route: "games.bus"
-    }
-]
+const { singleRoute, multiRoute } = defineProps<{
+    singleRoute: string,
+    multiRoute: string
+}>();
 </script>
 
 <template>
@@ -25,16 +15,22 @@ const buttons = [
 
         <div class="flex flex-grow w-100 flex-col gap-2">
             <router-link
-                v-for="button in buttons" 
-                :to="{ name: button.route }" 
+                :to="{ name: singleRoute }" 
                 class="bg-wisteria-400 text-black text-xl w-100 p-2 rounded-md text-center"
             >
-                {{ button.text }}
+                Single Player
+            </router-link>
+
+            <router-link
+                :to="{ name: multiRoute }" 
+                class="bg-wisteria-400 text-black text-xl w-100 p-2 rounded-md text-center"
+            >
+                Multiplayer
             </router-link>
         </div>
 
         <div class="mx-auto">
-            <img :src="welcomePng" class="w-64 h-auto"/>
+            <img :src="lovePng" class="w-64 h-auto"/>
         </div>
     </div>
 </template>
