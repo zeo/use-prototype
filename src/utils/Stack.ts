@@ -16,4 +16,10 @@ export class Stack<T> {
     isEmpty(): boolean {
         return this.items.length === 0;
     }
+
+    clear(): void {
+        while(!this.isEmpty()) {
+            this.pop()
+        }
+    }
 }

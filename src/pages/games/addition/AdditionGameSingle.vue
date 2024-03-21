@@ -2,22 +2,32 @@
 import {Ref, ref} from "vue";
 import letsGoPng from "../../../assets/lets-go.png";
 import checkmarkPng from "../../../assets/checkmark.png";
-import perfectPng from "../../../assets/perfect.png";
-import noPng from "../../../assets/no.png";
 import applePng from "../../../assets/apple.png";
 import { generateRandomNumberBetween } from "../../../utils/math";
 import { Stack } from "../../../utils/Stack.ts"
+import GameFinished from "./gameFinished.vue";
 
-const target = ref(generateRandomNumberBetween(4, 9));
-const apples = ref(target.value + generateRandomNumberBetween(1, target.value));
-const pileOne = ref(Math.floor(apples.value / 2)  + generateRandomNumberBetween(-3, 3))
-const pileTwo = ref(apples.value - pileOne.value)
+const target = ref(0)
+const pileOne = ref(0)
+const pileTwo = ref(0)
 const pileMap = {"pileOne": pileOne, "pileTwo": pileTwo}
 const addOrder = new Stack<Ref<number>>()
 const selectedApples = ref(0);
-
 const submitted = ref(false);
 const isCorrect = ref<boolean | null>(null);
+
+const setupGame = () => {
+  target.value = generateRandomNumberBetween(2, 10)
+  const apples = target.value + Math.ceil(Math.random() * target.value * 0.75)
+  const rand = Math.floor(apples / 4)
+  pileOne.value = Math.floor(apples / 2)  + generateRandomNumberBetween(-rand, rand)
+  pileTwo.value = apples - pileOne.value
+  selectedApples.value = 0
+  addOrder.clear()
+  submitted.value = false
+}
+
+
 
 const addApple = (pile: Ref<number>) => {
     pile.value--;
@@ -37,6 +47,8 @@ const submit = () => {
     isCorrect.value = selectedApples.value == target.value;
     submitted.value = true;
 };
+
+setupGame()
 </script>
 
 <template>
@@ -53,6 +65,7 @@ const submit = () => {
                 </button>
             </div>
 
+          <div class="flex flex-row justify-between">
             <div>
                 <button
                     v-for="_ in pileOne"
@@ -68,12 +81,11 @@ const submit = () => {
                     v-for="_ in pileTwo"
                     @click="addApple(pileMap.pileTwo)"
                     class=""
-
                 >
                     <img :src="applePng" class="w-12 h-auto">
                 </button>
             </div>
-
+          </div>
             <div class="mt-12">
                 <button
                     v-for="_ in selectedApples"
@@ -86,9 +98,7 @@ const submit = () => {
         </template>
 
         <template v-else>
-            <div class="m-auto">
-                <img :src="isCorrect ? perfectPng : noPng" class="w-64 h-auto"/>
-            </div>
+            <game-finished :is-correct="isCorrect" :restart="setupGame"></game-finished>
         </template>
     </div>
 </template>
