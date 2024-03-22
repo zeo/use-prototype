@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { SplitScreen } from '../../../components';
-import {Ref, ref, watch, watchEffect} from "vue";
+import {Ref, ref} from "vue";
 import applePng from "../../../assets/apple.png";
 import {generateRandomNumberBetween} from "../../../utils/math.ts";
+import crossPng from "../../../assets/cross.png"
 import checkmarkPng from "../../../assets/checkmark.png";
-import perfectPng from "../../../assets/perfect.png";
-import noPng from "../../../assets/no.png";
+
 import GameFinished from "./gameFinished.vue";
 
 const targetAppels = ref(0)
@@ -77,7 +77,7 @@ setupGame()
                   </button>
                 </div>
                 <button @click="playerOneSubmit">
-                  <img :src="checkmarkPng" class="my-auto w-12"/>
+                  <img :src="playerOneReady ? crossPng : checkmarkPng" class="my-auto w-12"/>
                 </button>
               </div>
             </template>
@@ -98,7 +98,7 @@ setupGame()
                     </button>
                 </div>
                 <button @click="playerTwoSubmit">
-                  <img :src="checkmarkPng" class="my-auto w-12"/>
+                  <img :src="playerTwoReady ? crossPng : checkmarkPng" class="my-auto w-12"/>
                 </button>
               </div>
             </template>
