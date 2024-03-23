@@ -3,14 +3,19 @@ import { ref } from "vue";
 import lionPng from "../../../assets/lion.png";
 import lionSuccessPng from "../../../assets/lion-success.png";
 import lionNoPng from "../../../assets/lion-no.png";
+import lionGo from "../../../assets/lion-go.png"
+import bus from "../../../assets/bus.png"
+import arrow from "../../../assets/arrow.png"
 import { generateRandomNumberBetween } from "../../../utils/math";
 import { shuffleArray } from "../../../utils/array";
 
-const inBus = ref(generateRandomNumberBetween(0, 3));
-const enterBus = ref(generateRandomNumberBetween(1, 4));
-const answer = ref(inBus.value + enterBus.value);
 
-const answers = ref(shuffleArray([answer.value, answer.value - 2, answer.value - 1, answer.value + 1]));
+const inBus = ref(generateRandomNumberBetween(0, 3));
+const enterBus = ref(generateRandomNumberBetween(inBus.value >= 1 ? 1 : 2, 5));
+const leaveBus = ref(generateRandomNumberBetween(1, inBus.value + enterBus.value - 1 ))
+const answer = ref(inBus.value + enterBus.value - leaveBus.value);
+
+const answers = ref(shuffleArray(Array.from({length: 4}, (_, i) => answer.value + i - ((answer.value - 2) >= 0 ? 2 : 0))));
 const answerIndex = ref(answers.value.indexOf(answer.value));
 const selectedAnswer = ref<number | null>(null);
 
@@ -29,11 +34,46 @@ const selectAnswer = (i: number) => {
         </div>
 
         <div v-if="selectedAnswer === null">
-            {{ enterBus }} => {{ inBus }}
+            {{ enterBus }} => {{ inBus }} => {{ leaveBus }}
+          <div class="flex flex-col">
+            <div class="flex flex-row">
+              <div class="flex flex-col">
+                <h1 class="font-bold text-4xl">{{ enterBus }}</h1>
+                <div class="flex flex-row">
+                  <img v-for="_ in enterBus" :src="lionGo" class="mx-auto w-32 h-auto">
+                </div>
+              </div>
+              <div>
+                <img :src="arrow" class="mx-auto w-32 h-auto rotate-90">
+              </div>
+              <div>
+                <div class="flex flex-row">
+                  <h1 class="font-bold text-3xl">{{ inBus }}</h1>
+                  <img v-for="_ in inBus" :src="lionPng" class="mx-auto w-10 h-auto">
+                </div>
+
+                <img :src="bus" class="mx-auto w-32 h-auto">
+              </div>
+            </div>
+            <div class="flex flex-row">
+              <div>
+                <img :src="bus" class="mx-auto w-32 h-auto">
+              </div>
+              <div>
+                <img :src="arrow" class="mx-auto w-32 h-auto rotate-90">
+              </div>
+              <div class="flex flex-col">
+                <h1 class="font-bold text-4xl">{{ leaveBus }}</h1>
+                <div class="flex flex-row">
+                  <img v-for="_ in leaveBus" :src="lionGo" class="mx-auto w-32 h-auto">
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div v-else class="m-auto">
-            <img :src="selectedAnswer ? lionSuccessPng : lionNoPng" class="w-64 h-auto"/>
+            <img :src="selectedAnswer == answerIndex ? lionSuccessPng : lionNoPng" class="w-64 h-auto"/>
         </div>
 
 
