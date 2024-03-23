@@ -34,7 +34,6 @@ const selectAnswer = (i: number) => {
         </div>
 
         <div v-if="selectedAnswer === null">
-            {{ enterBus }} => {{ inBus }} => {{ leaveBus }}
           <div class="flex flex-col">
             <div class="flex flex-row">
               <div class="flex flex-col">
