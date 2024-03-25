@@ -25,14 +25,14 @@ const selectAnswer = (i: number) => {
     <SplitScreen>
       <template #one>
         <div class="p-4 flex flex-col">
-          <div class="flex flex-row">
+          <div class="flex flex-row center">
             <div class="flex flex-row gap-2">
               <img :src="monkeyPng" class="w-24 h-auto">
               <p class="my-auto">How many bananas are left?</p>
             </div>
           </div>
 
-          <div class="flex flex-row">
+          <div class="flex flex-row center">
             <p>{{ first }}</p>
             <img :src="bananaPng" class="w-12 h-auto"/>
             <p>-</p>
@@ -42,7 +42,6 @@ const selectAnswer = (i: number) => {
             <p>?</p>
             <img :src="bananaPng" class="w-12 h-auto"/>
           </div>
-
           <div class="grid grid-cols-4 gap-4">
             <button
                 v-for="(answer, i) in answers.slice(4, 8)"
@@ -58,14 +57,14 @@ const selectAnswer = (i: number) => {
       </template>
       <template #two>
         <div class="p-4 flex flex-col">
-          <div class="flex flex-row">
+          <div class="flex flex-row center">
             <div class="flex flex-row gap-2">
               <img :src="monkeyPng" class="w-24 h-auto">
               <p class="my-auto">How many bananas are left?</p>
             </div>
           </div>
 
-          <div class="flex flex-row">
+          <div class="flex flex-row center">
             <p>{{ first }}</p>
             <img :src="bananaPng" class="w-12 h-auto"/>
             <p>-</p>
@@ -92,3 +91,12 @@ const selectAnswer = (i: number) => {
     </SplitScreen>
   </div>
 </template>
+
+
+<style>
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+</style>
