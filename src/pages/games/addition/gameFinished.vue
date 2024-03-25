@@ -3,7 +3,7 @@ import perfectPng from "../../../assets/perfect.png";
 import noPng from "../../../assets/no.png";
 
 const { isCorrect, restart } = defineProps<{
-  isCorrect: boolean
+  isCorrect: boolean | null
   restart: VoidFunction
 }>();
 </script>
