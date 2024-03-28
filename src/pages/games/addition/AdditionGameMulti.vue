@@ -7,6 +7,7 @@ import crossPng from "../../../assets/cross.png"
 import checkmarkPng from "../../../assets/checkmark.png";
 
 import GameFinished from "./gameFinished.vue";
+import letsGoPng from "../../../assets/lets-go.png";
 
 const targetAppels = ref(0)
 const playerOneApples = ref(0)
@@ -66,6 +67,16 @@ setupGame()
                   <game-finished :is-correct="targetAppels === givenApples" :restart="setupGame"></game-finished>
               </div>
               <div v-else>
+                <div class="flex flex-row justify-between">
+                  <div class="flex flex-row gap-2">
+                    <img :src="letsGoPng" class="w-24 h-auto">
+                    <p class="my-auto">Count to {{ targetAppels }} apples!</p>
+                  </div>
+                  <button @click="playerOneSubmit">
+                    <img :src="playerOneReady ? crossPng : checkmarkPng" class="my-auto w-12"/>
+                  </button>
+                </div>
+                <div class="flex flex-row justify-between">
                 <div>
                     <button v-for="_ in playerOneApples" @click="playerGive(playerMap.playerOne)" class="">
                         <img :src="applePng" class="w-12 h-auto">
@@ -76,9 +87,7 @@ setupGame()
                     <img :src="applePng" class="w-12 h-auto">
                   </button>
                 </div>
-                <button @click="playerOneSubmit">
-                  <img :src="playerOneReady ? crossPng : checkmarkPng" class="my-auto w-12"/>
-                </button>
+                </div>
               </div>
             </template>
                 
@@ -87,7 +96,17 @@ setupGame()
                 <game-finished :is-correct="targetAppels === givenApples" :restart="setupGame"></game-finished>
               </div>
               <div v-else>
-              <div>
+                <div class="flex flex-row justify-between">
+                  <div class="flex flex-row gap-2">
+                    <img :src="letsGoPng" class="w-24 h-auto">
+                    <p class="my-auto">Count to {{ targetAppels }} apples!</p>
+                  </div>>
+                  <button @click="playerTwoSubmit">
+                    <img :src="playerTwoReady ? crossPng : checkmarkPng" class="my-auto w-12"/>
+                  </button>
+                </div>
+                <div class="flex flex-row justify-between">
+                <div>
                     <button v-for="_ in playerTwoApples" @click="playerGive(playerMap.playerTwo)" class="">
                         <img :src="applePng" class="w-12 h-auto">
                     </button>
@@ -97,9 +116,7 @@ setupGame()
                         <img :src="applePng" class="w-12 h-auto">
                     </button>
                 </div>
-                <button @click="playerTwoSubmit">
-                  <img :src="playerTwoReady ? crossPng : checkmarkPng" class="my-auto w-12"/>
-                </button>
+                </div>
               </div>
             </template>
         </SplitScreen>
