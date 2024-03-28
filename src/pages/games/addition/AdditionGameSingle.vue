@@ -15,6 +15,7 @@ const addOrder = new Stack<Ref<number>>()
 const selectedApples = ref(0);
 const submitted = ref(false);
 const isCorrect = ref<boolean | null>(null);
+let difference = 0
 
 const setupGame = () => {
   target.value = generateRandomNumberBetween(2, 10)
@@ -46,6 +47,7 @@ const removeApple = () => {
 const submit = () => {
     isCorrect.value = selectedApples.value == target.value;
     submitted.value = true;
+    difference = target.value - selectedApples.value; //if higher than target; negative
 };
 
 setupGame()
@@ -98,7 +100,7 @@ setupGame()
         </template>
 
         <template v-else>
-            <game-finished :is-correct="isCorrect" :restart="setupGame"></game-finished>
+            <game-finished :is-correct="isCorrect" :diff="difference" :restart="setupGame"></game-finished>
         </template>
     </div>
 </template>

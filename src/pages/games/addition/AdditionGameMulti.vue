@@ -64,7 +64,7 @@ setupGame()
         <SplitScreen>
             <template #one>
               <div v-if="playerOneReady && playerTwoReady">
-                  <game-finished :is-correct="targetAppels === givenApples" :restart="setupGame"></game-finished>
+                  <game-finished :is-correct="targetAppels === givenApples" :difference="targetAppels - givenApples" :restart="setupGame"></game-finished>
               </div>
               <div v-else>
                 <div class="flex flex-row justify-between">
@@ -93,7 +93,7 @@ setupGame()
                 
             <template #two>
               <div v-if="playerOneReady && playerTwoReady">
-                <game-finished :is-correct="targetAppels === givenApples" :restart="setupGame"></game-finished>
+                <game-finished :is-correct="targetAppels === givenApples" :difference="targetAppels - givenApples" :restart="setupGame"></game-finished>
               </div>
               <div v-else>
                 <div class="flex flex-row justify-between">
