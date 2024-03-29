@@ -19,6 +19,10 @@ const answers = ref(shuffleArray(Array.from({length: 4}, (_, i) => answer.value 
 const answerIndex = ref(answers.value.indexOf(answer.value));
 const selectedAnswer = ref<number | null>(null);
 
+const retry = () => {
+  selectedAnswer.value = -1;
+}
+
 const selectAnswer = (i: number) => {
     selectedAnswer.value = i;
 };
@@ -29,11 +33,11 @@ const selectAnswer = (i: number) => {
         <div class="flex flex-row">
             <div class="flex flex-row gap-2">
                 <img :src="lionPng" class="w-24 h-auto">
-                <p class="my-auto">How many people are in the bus?</p>
+                <p class="my-auto">How many lions are in the bus at the end?</p>
             </div>
         </div>
 
-        <div v-if="selectedAnswer === null">
+        <div v-if="(selectedAnswer === null || selectedAnswer === -1)">
           <div class="flex flex-col">
             <div class="flex flex-row">
               <div class="flex flex-col">
@@ -52,6 +56,7 @@ const selectAnswer = (i: number) => {
                 </div>
 
                 <img :src="bus" class="mx-auto w-32 h-auto">
+                <br>
               </div>
             </div>
             <div class="flex flex-row">
@@ -72,7 +77,21 @@ const selectAnswer = (i: number) => {
         </div>
 
         <div v-else class="m-auto">
-            <img :src="selectedAnswer == answerIndex ? lionSuccessPng : lionNoPng" class="w-64 h-auto"/>
+            <template v-if="selectedAnswer != answerIndex">
+              <img :src="lionNoPng" class="w-64 h-auto"/>
+              <p>That's not quite correct, try again!</p>
+              <button @click="retry">Restart</button>
+            </template>
+            <template v-else>
+              <img :src="lionSuccessPng" class="w-64 h-auto"/>
+              <p>Well done!</p>
+              <router-link
+                to='/games/bus'
+                class="bg-chelsea-cucumber-300 p-2 text-black text-center rounded-md"
+              >
+                Restart
+              </router-link>
+            </template>
         </div>
 
 

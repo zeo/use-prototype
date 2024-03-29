@@ -29,6 +29,11 @@ const selectAnswerTwo = (i: number) => {
   playerTwoAnswer.value = i;
 }
 
+const retry = () => {
+  playerOneAnswer.value = -1;
+  playerTwoAnswer.value = -1
+}
+
 </script>
 
 <template>
@@ -38,11 +43,11 @@ const selectAnswerTwo = (i: number) => {
       <div class="flex flex-row">
         <div class="flex flex-row gap-2">
           <img :src="lionPng" class="w-24 h-auto">
-          <p class="my-auto">How many people are in the bus?</p>
+          <p class="my-auto">How many lions are in the bus? Work together to find the answer!</p>
         </div>
       </div>
 
-      <div v-if="playerOneAnswer === null || (playerTwoAnswer != playerOneAnswer)">
+      <div v-if="playerOneAnswer === null || (playerTwoAnswer != playerOneAnswer) || playerOneAnswer == -1">
         <div class="flex flex-col">
           <div class="flex flex-row">
             <div class="flex flex-col">
@@ -67,7 +72,29 @@ const selectAnswerTwo = (i: number) => {
       </div>
 
       <div v-else class="m-auto">
-        <img :src="playerOneAnswer == answerIndex ? lionSuccessPng : lionNoPng" class="w-64 h-auto"/>
+        <template v-if="playerOneAnswer != answerIndex">
+          <div class="flex flex-row gap-4">
+            <img :src="lionNoPng" class="w-64 h-auto"/>
+            <div class="m-auto">
+              <p>That's not quite correct, try again!</p>
+              <button @click="retry" class="bg-chelsea-cucumber-300 p-2 text-black text-center rounded-md">Restart</button>
+            </div>
+          </div>
+        </template>
+        <template v-else>
+          <div class="flex flex-row gap-4">
+            <img :src="lionSuccessPng" class="w-64 h-auto"/>
+            <div class="m-auto">
+              <p>Well done!</p>
+              <router-link
+                to='/games/bus'
+                class="bg-chelsea-cucumber-300 p-2 text-black text-center rounded-md"
+              >
+                Restart
+              </router-link>
+            </div>
+          </div>
+        </template>
       </div>
 
 
@@ -84,15 +111,16 @@ const selectAnswerTwo = (i: number) => {
         </button>
       </div>
     </template>
+
     <template #two>
       <div class="flex flex-row">
         <div class="flex flex-row gap-2">
           <img :src="lionPng" class="w-24 h-auto">
-          <p class="my-auto">How many people are in the bus?</p>
+          <p class="my-auto">How many lions are in the bus? Work together to find the answer!</p>
         </div>
       </div>
 
-      <div v-if="playerTwoAnswer === null || (playerOneAnswer != playerTwoAnswer)">
+      <div v-if="playerTwoAnswer === null || (playerOneAnswer != playerTwoAnswer) || playerOneAnswer == -1">
         <div class="flex flex-col">
           <div class="flex flex-row">
             <div>
@@ -112,7 +140,29 @@ const selectAnswerTwo = (i: number) => {
       </div>
 
       <div v-else class="m-auto">
-        <img :src="playerTwoAnswer == answerIndex ? lionSuccessPng : lionNoPng" class="w-64 h-auto"/>
+        <template v-if="playerOneAnswer != answerIndex">
+          <div class="flex flex-row gap-4">
+            <img :src="lionNoPng" class="w-64 h-auto"/>
+            <div class="m-auto">
+              <p>That's not quite correct, try again!</p>
+              <button @click="retry" class="bg-chelsea-cucumber-300 p-2 text-black text-center rounded-md">Restart</button>
+            </div>
+          </div>
+        </template>
+        <template v-else>
+          <div class="flex flex-row gap-4">
+            <img :src="lionSuccessPng" class="w-64 h-auto"/>
+            <div class="m-auto">
+              <p>Well done!</p>
+              <router-link
+                to='/games/bus'
+                class="bg-chelsea-cucumber-300 p-2 text-black text-center rounded-md"
+              >
+                Restart
+              </router-link>
+            </div>
+          </div>
+        </template>
       </div>
 
 
