@@ -11,7 +11,7 @@ const buttons = [
         route: "games.subtraction",
     },
     {
-        text: "Bus Sommen",
+        text: "Bus Games",
         route: "games.bus"
     }
 ]

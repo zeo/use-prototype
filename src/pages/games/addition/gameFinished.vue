@@ -22,10 +22,10 @@ checkDiff()
 </script>
 
 <template>
-  <template v-if="!isCorrect">
-    <div class="m-auto">
+    <template v-if="!isCorrect">
+    <div class="mx-auto">
       <p>That's too {{ difference }}, keep practicing!</p>
-      <img :src="noPng" class="w-64 h-auto"/>
+      <img :src="noPng" class="w-32 h-auto"/>
       <button @click="restart">Restart</button>
     </div>
   </template>
@@ -37,7 +37,3 @@ checkDiff()
     </div>
   </template>
 </template>
-
-<style scoped>
-
-</style>

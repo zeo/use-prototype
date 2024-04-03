@@ -31,6 +31,8 @@ const setupGame = () => {
   playerOneReady.value = false
   playerTwoReady.value = false
 }
+const gamesPlayed = ref(0)
+const gamesCorrect = ref(0)
 
 const playerGive = (player: Ref<number>) => {
   givenApples.value++;
@@ -44,6 +46,14 @@ const playerRemove = (player: Ref<number>) => {
 
 const playerSubmit = (player: Ref<boolean>) => {
   player.value = !player.value
+
+  if (playerOneReady.value && playerTwoReady.value) {
+    gamesPlayed.value++;
+    
+    if (targetAppels.value == givenApples.value) {
+      gamesCorrect.value++;
+    }
+  }
 }
 
 const playerOneSubmit = () => {
@@ -63,8 +73,15 @@ setupGame()
 
         <SplitScreen>
             <template #one>
-              <div v-if="playerOneReady && playerTwoReady">
-                  <game-finished :is-correct="targetAppels === givenApples" :diff="targetAppels - givenApples" :restart="setupGame"></game-finished>
+              <div v-if="playerOneReady && playerTwoReady" class="h-full">
+                  <div v-if="gamesPlayed == 5" class="flex h-full text-center">
+                    <div class="mx-auto my-auto">
+                      <p class="text-lg">You scored:</p>
+                      <p class="font-bold" :class="gamesCorrect == 5 ? 'text-green-600' : ''">{{ gamesCorrect }} / {{  gamesPlayed }}</p>
+                    </div>
+                  </div>
+
+                  <game-finished v-else :is-correct="targetAppels === givenApples" :diff="targetAppels - givenApples" :restart="setupGame"></game-finished>
               </div>
               <div v-else>
                 <div class="flex flex-row justify-between">
@@ -92,15 +109,22 @@ setupGame()
             </template>
                 
             <template #two>
-              <div v-if="playerOneReady && playerTwoReady">
-                <game-finished :is-correct="targetAppels === givenApples" :diff="targetAppels - givenApples" :restart="setupGame"></game-finished>
+              <div v-if="playerOneReady && playerTwoReady" class="h-full">
+                <div v-if="gamesPlayed == 5" class="flex h-full">
+                    <div class="mx-auto my-auto text-center">
+                      <p class="text-lg">You scored:</p>
+                      <p class="font-bold" :class="gamesCorrect == 5 ? 'text-green-600' : ''">{{ gamesCorrect }} / {{  gamesPlayed }}</p>
+                    </div>
+                  </div>
+
+                <game-finished v-else :is-correct="targetAppels === givenApples" :diff="targetAppels - givenApples" :restart="setupGame"></game-finished>
               </div>
               <div v-else>
                 <div class="flex flex-row justify-between">
                   <div class="flex flex-row gap-2">
                     <img :src="letsGoPng" class="w-24 h-auto">
                     <p class="my-auto">Count to {{ targetAppels }} apples!</p>
-                  </div>>
+                  </div>
                   <button @click="playerTwoSubmit">
                     <img :src="playerTwoReady ? crossPng : checkmarkPng" class="my-auto w-12"/>
                   </button>

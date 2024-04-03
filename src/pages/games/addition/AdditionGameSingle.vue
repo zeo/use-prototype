@@ -16,6 +16,8 @@ const selectedApples = ref(0);
 const submitted = ref(false);
 const isCorrect = ref<boolean | null>(null);
 let difference = 0
+const gamesPlayed = ref(0)
+const gamesCorrect = ref(0)
 
 const setupGame = () => {
   target.value = generateRandomNumberBetween(2, 10)
@@ -27,8 +29,6 @@ const setupGame = () => {
   addOrder.clear()
   submitted.value = false
 }
-
-
 
 const addApple = (pile: Ref<number>) => {
     pile.value--;
@@ -48,6 +48,11 @@ const submit = () => {
     isCorrect.value = selectedApples.value == target.value;
     submitted.value = true;
     difference = target.value - selectedApples.value; //if higher than target; negative
+
+    gamesPlayed.value++;
+    if (isCorrect.value) {
+        gamesCorrect.value++;
+    }
 };
 
 setupGame()
@@ -55,7 +60,14 @@ setupGame()
 
 <template>
     <div class="min-h-screen bg-sky-blue-300 p-4 flex flex-col">
-        <template v-if="!submitted">
+        <template v-if="gamesPlayed == 5">
+            <div class="mx-auto my-auto text-center">
+                <p class="text-lg">You scored:</p>
+                <p class="font-bold" :class="gamesCorrect == 5 ? 'text-green-600' : ''">{{ gamesCorrect }} / {{  gamesPlayed }}</p>
+            </div>
+        </template>
+
+        <template v-else-if="!submitted">
             <div class="flex flex-row justify-between">
                 <div class="flex flex-row gap-2">
                     <img :src="letsGoPng" class="w-24 h-auto">

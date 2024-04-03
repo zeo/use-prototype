@@ -1,5 +1,9 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 dependencies:
   '@vueuse/sound':
     specifier: ^2.0.1
@@ -1517,7 +1521,3 @@ packages:
     engines: {node: '>= 14'}
     hasBin: true
     dev: false
-
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false
